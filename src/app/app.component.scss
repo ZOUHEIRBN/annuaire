@@ -6,10 +6,11 @@
 
 .container {
   width: 100vw;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 64px);
 }
 
 .content {
+  padding: 20px;
   display: flex;
   height: 100%;
   align-items: center;
