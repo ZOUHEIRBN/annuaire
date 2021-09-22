@@ -16,14 +16,20 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 
 import { HomeComponent } from './views/home/home.component';
-import { StatsComponent } from './views/stats/stats.component'
+import { StatsComponent } from './views/stats/stats.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { BarComponent } from './components/chart/bar/bar.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    StatsComponent
+    StatsComponent,
+    ToolbarComponent,
+    BarComponent,
+
   ],
   imports: [
     BrowserModule,
