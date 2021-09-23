@@ -1,0 +1,7 @@
+mat-grid-tile{
+  display: flex;
+  bmg-pie-chart, bmg-bar-chart {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+}

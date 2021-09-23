@@ -1,28 +1,34 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { get_default_palette, get_palette } from 'src/app/meta';
+import { get_palette } from 'src/app/meta';
 
 @Component({
-  selector: 'bmg-bar-chart',
-  templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.scss']
+  selector: 'bmg-pie-chart',
+  templateUrl: './pie.component.html',
+  styleUrls: ['./pie.component.scss']
 })
-export class BarComponent implements OnInit {
+export class PieComponent implements OnInit {
+  @Input() pieChartData:any[] = [];
 
-  @Input() barChartData:any[] = [];
   ngOnInit(): void {
     this.randomize()
   }
 
   chartOptions:any = {
     scaleShowVerticalLines: true,
-    responsive: true
+    responsive: true,
+    segmentShowStroke: true,
+    elements: {
+        arc: {
+            borderWidth: .2
+        }
+    }
   };
 
     chartLabels:string[] = ['2012', '2013', '2014', '2015', '2016', '2017', '2018'];
-    chartType:string = 'bar';
+    chartType:string = 'pie';
     chartLegend:boolean = true;
 
-    chartColors:Array<any> = ["#fe4578", "#a4dcb3"] //get_default_palette();
+    chartColors:Array<any> = get_palette();
 
 
     // events
@@ -43,8 +49,11 @@ export class BarComponent implements OnInit {
         Math.round(Math.random() * 100),
         (Math.random() * 100),
         Math.round(Math.random() * 100)];
-      let clone = JSON.parse(JSON.stringify(this.barChartData));
+
+
+      let clone = JSON.parse(JSON.stringify(this.pieChartData));
       clone[0].data = data;
-      this.barChartData = clone;
+      this.pieChartData = clone;
     }
+
 }

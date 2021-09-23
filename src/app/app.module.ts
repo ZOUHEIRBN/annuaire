@@ -19,6 +19,8 @@ import { HomeComponent } from './views/home/home.component';
 import { StatsComponent } from './views/stats/stats.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BarComponent } from './components/chart/bar/bar.component';
+import { ChartsModule } from 'ng2-charts';
+import { PieComponent } from './components/chart/pie/pie.component';
 
 
 
@@ -29,6 +31,7 @@ import { BarComponent } from './components/chart/bar/bar.component';
     StatsComponent,
     ToolbarComponent,
     BarComponent,
+    PieComponent,
 
   ],
   imports: [
@@ -36,6 +39,7 @@ import { BarComponent } from './components/chart/bar/bar.component';
     RouterModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ChartsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
