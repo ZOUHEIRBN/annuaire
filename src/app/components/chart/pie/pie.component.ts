@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { get_palette } from 'src/app/meta';
+import { get_palette, make_palette } from 'src/app/meta';
 
 @Component({
   selector: 'bmg-pie-chart',
@@ -8,10 +8,6 @@ import { get_palette } from 'src/app/meta';
 })
 export class PieComponent implements OnInit {
   @Input() pieChartData:any[] = [];
-
-  ngOnInit(): void {
-    this.randomize()
-  }
 
   chartOptions:any = {
     scaleShowVerticalLines: true,
@@ -28,8 +24,13 @@ export class PieComponent implements OnInit {
     chartType:string = 'pie';
     chartLegend:boolean = true;
 
-    chartColors:Array<any> = get_palette();
+    chartColors:Array<any> = make_palette('pie', 'primarythirdaccent')
 
+
+    ngOnInit(): void {
+      console.log(this.chartColors)
+      this.randomize()
+    }
 
     // events
     public chartClicked(e:any):void {

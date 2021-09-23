@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { get_default_palette, get_palette } from 'src/app/meta';
+import { get_default_palette, get_palette, make_palette } from 'src/app/meta';
 
 @Component({
   selector: 'bmg-bar-chart',
@@ -22,7 +22,7 @@ export class BarComponent implements OnInit {
     chartType:string = 'bar';
     chartLegend:boolean = true;
 
-    chartColors:Array<any> = ["#fe4578", "#a4dcb3"] //get_default_palette();
+    chartColors:Array<any> = make_palette('bar') //get_default_palette();
 
 
     // events
