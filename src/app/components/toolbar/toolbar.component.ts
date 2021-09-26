@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { APIService } from 'src/app/services/api.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+
 
 @Component({
   selector: 'bmg-toolbar',
@@ -9,14 +10,17 @@ import { APIService } from 'src/app/services/api.service';
 export class ToolbarComponent implements OnInit {
   @Output() menuClick = new EventEmitter()
 
-  constructor(private _api:APIService) { }
+  constructor(private _authService:AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   callVendastaAPI(){
+    let u = this._authService.login('test', 'test')
+    u.subscribe(e => {
+      console.log(e)
+    })
 
-    this._api.helloWorld()
   }
 
 }

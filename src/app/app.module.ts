@@ -21,6 +21,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BarComponent } from './components/chart/bar/bar.component';
 import { ChartsModule } from 'ng2-charts';
 import { PieComponent } from './components/chart/pie/pie.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -35,6 +36,7 @@ import { PieComponent } from './components/chart/pie/pie.component';
 
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     RouterModule,
     BrowserAnimationsModule,
