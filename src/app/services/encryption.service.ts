@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import JSEncrypt from 'jsencrypt';
-import * as jwt from 'jsonwebtoken'
-// import base64url from "base64url";
+import CryptoJS from 'crypto-js';
+import { Buffer } from 'buffer';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,17 +49,19 @@ export class EncryptionService {
     return this.rsa.decrypt(string).toString()
   }
 
-  getJWTToken(){
-    // this.httpClient.get("http://example.com/api/things").subscribe(
-    //   (data) => console.log(data),
-    //   (err) => console.log(err)
-    // );
-    let Y = Base64URLEncode({
-      "alg": "RS256",
-      "typ": "JWT"
-      }) + '.' + Base64URLEncode(payload)
-    jwt.sign({
-      data: 'foobar'
-    }, this.rsa.getPrivateKey(), { expiresIn: '1h',  });
+  getJWTToken(payload){
+    var encodeBase64 = function(string){
+      return Buffer.from(string).toString('base64')
+    }
+    let header = '{"alg":"HS256","typ":"JWT"}'
+    let pld = JSON.stringify(payload)
+    let key = 'secretkey'
+    let unsignedToken = encodeBase64(header) + '.' + encodeBase64(pld)
+    let signature = CryptoJS.SHA256(key, unsignedToken).toString(CryptoJS.enc.Hex) // HMAC-SHA256(key, unsignedToken)
+
+    let token = encodeBase64(header) + '.' + encodeBase64(pld) + '.' + encodeBase64(signature)
+    return token
+
+
   }
 }
