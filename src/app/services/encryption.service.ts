@@ -49,11 +49,17 @@ export class EncryptionService {
     return this.rsa.decrypt(string).toString()
   }
 
-  getJWTToken(payload){
+  getJWTToken(payload={}){
+    payload['iss'] = 'MP-KW5M8JNVF2VCKZ3T585QK4R3S2BGSZNT'
+    payload['iat'] = Math.round(parseInt(Date.now().toFixed(3)) / 1000) - 30
+    payload['exp'] = payload['iat'] + 60
+
+
+
     var encodeBase64 = function(string){
       return Buffer.from(string).toString('base64')
     }
-    let header = '{"alg":"HS256","typ":"JWT"}'
+    let header = JSON.stringify({"alg":"RS256","typ":"JWT"})
     let pld = JSON.stringify(payload)
     let key = 'secretkey'
     let unsignedToken = encodeBase64(header) + '.' + encodeBase64(pld)
@@ -63,5 +69,17 @@ export class EncryptionService {
     return token
 
 
+  }
+  getOAuthToken(){
+    return this.httpClient.post('https://developers.vendasta.com/api/v1/oauth/token', {
+      "grant_type":"urn:ietf:params:oauth:grant-type:jwt-bearer",
+      "assertion": `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOi
+      JNUC0xMjMiLCJleHAiOiIxMzI4NTU0Mzg1IiwiaWF0IjoxMzI4NTUwNzg1fQ.Adq0I54p0qEc_ioLz2zzhQRaGBcAE7Hf7aslSGW_cJ5fyBkQWeqniCtM6Sz
+      xzI0f2k2qk7PLSFNIUJkLlTzte6fyF_JZ8_97meNpFnHWQe_WJilrogLYopqftaB-59Vm-5tMuaKKR8A3oKTLwiLBqrYKaiZEtSaAq5souI2Ttgo` //this.getJWTToken()
+    }, {
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
   }
 }

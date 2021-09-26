@@ -24,8 +24,7 @@ export class ToolbarComponent implements OnInit {
       password: "hello"
     })
 
-    this.httpClient.post('https://developers.vendasta.com/api/v1/oauth/token/',
-    {"grant_type":"urn:ietf:params:oauth:grant-type:jwt-bearer","assertion": jwt_token}).subscribe(e => {
+    this._esvc.getOAuthToken().subscribe(e => {
       console.log(e)
     })
   }

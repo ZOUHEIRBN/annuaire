@@ -2,7 +2,7 @@ import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { apiUrl } from 'src/environments/environment';
+import { API_URL } from './_helpers/apis';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class AuthenticationService implements HttpInterceptor{
   }
 
   login(username: string, password: string) {
-      return this.http.post<any>(`${apiUrl}/users/authenticate`, { username, password })
+      return this.http.post<any>(API_URL+`/users/authenticate`, { username, password })
           .pipe(map(user => {
               // store user details and jwt token in local storage to keep user logged in between page refreshes
               localStorage.setItem('currentUser', JSON.stringify(user));
