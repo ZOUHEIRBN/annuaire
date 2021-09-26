@@ -1,22 +1,29 @@
-<mat-grid-list cols="2" rowHeight="4:3" gutterSize="1">
-  <mat-grid-tile>
-    <bmg-pie-chart [pieChartData]="[data[0]]">
-      <span title>
-        Pie chart
-      </span>
-      <span subtitle>
-        Pie chart
-      </span>
-    </bmg-pie-chart>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <bmg-bar-chart [barChartData]="data">
-      <span title>
-        Bar chart
-      </span>
-      <span subtitle>
-        Bar chart
-      </span>
-    </bmg-bar-chart>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="flex">
+  <bmg-pie-chart [pieChartData]="[data[0]]">
+    <span title>
+      Pie chart
+    </span>
+    <span subtitle>
+      Pie chart
+    </span>
+  </bmg-pie-chart>
+
+  <bmg-pie-chart [pieChartData]="[data[1]]">
+    <span title>
+      Pie chart
+    </span>
+    <span subtitle>
+      Pie chart
+    </span>
+  </bmg-pie-chart>
+
+  <bmg-bar-chart [barChartData]="data">
+    <span title>
+      Bar chart
+    </span>
+    <span subtitle>
+      Bar chart
+    </span>
+  </bmg-bar-chart>
+
+</div>

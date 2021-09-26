@@ -52,13 +52,13 @@ export function get_palette(color='primary'){
     let mixin_table = []
 
     if(color.includes('primary')){
-      mixin_table.push(PRIMARY_PALETTE.slice(0, splice_idx))
+      mixin_table.push(PRIMARY_PALETTE.slice(4, 4+splice_idx))
     }
     if(color.includes('accent')){
-      mixin_table.push(ACCENT_PALETTE.slice(0, splice_idx))
+      mixin_table.push(ACCENT_PALETTE.slice(4, 4+splice_idx))
     }
     if(color.includes('third')){
-      mixin_table.push(THIRD_PALETTE.slice(0, splice_idx))
+      mixin_table.push(THIRD_PALETTE.slice(4, 4+splice_idx))
     }
 
 

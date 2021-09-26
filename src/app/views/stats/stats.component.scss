@@ -5,3 +5,16 @@ mat-grid-tile{
     height: calc(100% - 10px);
   }
 }
+
+
+
+div.flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  & > * {
+    flex-basis: calc(33% - 15px);
+    margin: 5px;
+  }
+}
