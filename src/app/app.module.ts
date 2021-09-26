@@ -21,7 +21,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { BarComponent } from './components/chart/bar/bar.component';
 import { ChartsModule } from 'ng2-charts';
 import { PieComponent } from './components/chart/pie/pie.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenticationService } from './services/authentication.service';
 
 
 
@@ -49,9 +50,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatListModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

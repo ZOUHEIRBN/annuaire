@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { apiUrl } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthenticationService implements HttpInterceptor{
 
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
@@ -15,6 +15,16 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
       this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
       this.currentUser = this.currentUserSubject.asObservable();
+  }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      console.log("Interception In Progress"); //SECTION 1
+      const token: string = localStorage.getItem('token');
+      req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
+      req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+      req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
+      return next.handle(req)
+
+
   }
 
   public get currentUserValue(): any {
